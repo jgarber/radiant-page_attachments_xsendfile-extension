@@ -12,7 +12,6 @@ class PageAttachmentsXsendfileExtension < Radiant::Extension
     SiteController.send :include, PageAttachmentsXsendfile::SiteControllerExtensions
 
     # Include x_send_file Rails plugin
-    require 'x_send_file'
     ActionController::Base.send(:include, XSendFile::Controller)
   end
   
