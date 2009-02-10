@@ -14,9 +14,8 @@ require "#{RADIANT_ROOT}/spec/spec_helper"
 # ## FIXME: This seems to be needed because for some reason spec_helper.rb wipes out @@controllers_where_no_login_required.  See http://radiant.lighthouseapp.com/projects/11883/tickets/38-controllers_where_no_login_required-gets-reset-by-specrails#ticket-38-1
 SiteController.send :no_login_required
 
-if File.directory?(File.dirname(__FILE__) + "/scenarios")
-  Scenario.load_paths.unshift File.dirname(__FILE__) + "/scenarios"
-end
+Dataset::Resolver.default << (File.dirname(__FILE__) + "/datasets")
+
 if File.directory?(File.dirname(__FILE__) + "/matchers")
   Dir[File.dirname(__FILE__) + "/matchers/*.rb"].each {|file| require file }
 end

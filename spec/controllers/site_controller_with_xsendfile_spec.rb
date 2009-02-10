@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SiteController, 'with xsendfile' do
-  scenario :page_attachments
+  dataset :page_attachments
   
   before do
     @page = pages(:first)

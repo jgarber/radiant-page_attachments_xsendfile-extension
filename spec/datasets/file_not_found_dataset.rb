@@ -1,6 +1,6 @@
-# This scenario is just to override the corresponding scenario in Radiant 0.6.9
+# This dataset is just to override the corresponding dataset in Radiant 0.7
 # that gave this error the second and following times the spec was run:
-#   /Library/Ruby/Gems/1.8/gems/radiant-0.6.9/spec/scenarios/file_not_found_scenario.rb:2:
+#   /Library/Ruby/Gems/1.8/gems/radiant-0.7.0/spec/datasets/file_not_found_dataset.rb:2:
 #  superclass mismatch for class CustomFileNotFoundPage (TypeError)
 #
 # I just commented out all the CustomFileNotFoundPage references to make it work.
@@ -11,7 +11,7 @@ require 'file_not_found_page'
 # class CustomFileNotFoundPage < FileNotFoundPage
 # end
 
-class FileNotFoundScenario < Scenario::Base
+class FileNotFoundDataset < Dataset::Base
   uses :home_page
   
   def load

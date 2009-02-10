@@ -1,3 +1,25 @@
 = Page Attachments Xsendfile
 
-Description goes here
+Created by Jason Garber, October 2008.
+
+Works with the page_attachments extension to make attached files available under the page they're attached to, so you can link to files at sane URLs.  Since it uses the X-Sendfile header, delivery of the attached items doesn't block the Rails process.
+
+Ordinarily the page_attachments extension locates pages at URLs like /page_attachments/0000/0001/my_image.jpg, regardless of where the attachment is attached.  This may be fine for images, where the user never sees the URL, but what about PDFs or other files where the URL is important? 
+
+With the page_attachments_xsendfile extension, if you attach report.pdf to the page with the slug /president/board/, then the attachment is available at /president/board/report.pdf.
+
+== Installation
+=== Easy way:
+./script/extension install page_attachments_xsendfile
+
+=== Harder way:
+
+1) Unpack/checkout/export the extension into vendor/extensions of your 
+   project.
+
+2) Run the extension update task.
+
+  $ rake production radiant:extensions:page_attachments_xsendfile:update
+
+3) Restart your server
+

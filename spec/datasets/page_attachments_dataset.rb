@@ -1,4 +1,4 @@
-class PageAttachmentsScenario < Scenario::Base
+class PageAttachmentsDataset < Dataset::Base
   uses :pages
   
   def load

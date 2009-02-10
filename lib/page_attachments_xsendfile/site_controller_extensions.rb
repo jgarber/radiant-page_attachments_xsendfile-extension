@@ -8,7 +8,7 @@ module PageAttachmentsXsendfile::SiteControllerExtensions
     @page = find_page(url)
     unless @page.nil?
       if @page.is_a?(PageAttachment)
-        x_send_file(@page.full_filename, :type => @page.content_type, :disposition => 'inline')
+        send_file(@page.full_filename, :x_sendfile => true, :type => @page.content_type, :disposition => 'inline')
       else
         process_page(@page)
         @cache.cache_response(url, response) if request.get? and live? and @page.cache?
