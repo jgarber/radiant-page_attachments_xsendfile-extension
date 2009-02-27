@@ -12,7 +12,8 @@ class PageAttachmentsXsendfileExtension < Radiant::Extension
     SiteController.send :include, PageAttachmentsXsendfile::SiteControllerExtensions
     
     # May as well deliver cached pages with X-Sendfile since we know we have it.
-    ResponseCache.defaults[:use_x_sendfile] = true
+    env = ENV["RAILS_ENV"] || RAILS_ENV
+    ResponseCache.defaults[:use_x_sendfile] = true if env != "development"
   end
   
   def deactivate
