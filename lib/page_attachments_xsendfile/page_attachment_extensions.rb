@@ -1,6 +1,14 @@
 module PageAttachmentsXsendfile::PageAttachmentExtensions
   def self.included(base)
-    base.send :alias_method_chain, :public_filename, :xsendfile
+    base.send :alias_method_chain, :public_filename, :friendly_url_switching
+  end
+  
+  def public_filename_with_friendly_url_switching(thumbnail = nil, friendly_url = false)
+    if friendly_url
+      public_filename_with_xsendfile(thumbnail)
+    else
+      public_filename_without_friendly_url_switching(thumbnail)
+    end
   end
   
   # Gets the public path to the file, which is a child of the page the 
