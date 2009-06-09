@@ -7,7 +7,10 @@ class PageAttachmentsXsendfileExtension < Radiant::Extension
   
   
   def activate
-    Page.send :include, PageAttachmentsXsendfile::PageExtensions
+    Page.class_eval {
+      include PageAttachmentsXsendfile::PageExtensions
+      include PageAttachmentsXsendfile::PageAttachmentTagsExtensions
+    }
     PageAttachment.send :include, PageAttachmentsXsendfile::PageAttachmentExtensions
     SiteController.send :include, PageAttachmentsXsendfile::SiteControllerExtensions
     

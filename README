@@ -1,32 +1,39 @@
-= Page Attachments Xsendfile
+= Page Attachments X-Sendfile
 
-Created by Jason Garber, October 2008.
+Created by Jason Garber, October 2008.  Updated June 2009.
 
-Works with the page_attachments extension to make attached files available under the page they're attached to, so you can link to files at sane URLs.  Since it uses the X-Sendfile header, delivery of the attached items doesn't block the Rails process.
+This extension works with the page_attachments extension to make attached
+files available under the page they're attached to so you can link to files at
+friendly URLs. Since it uses the X-Sendfile header, delivery of the attached
+items doesn't block the Rails process, though it does require a couple
+database queries to find the page and the attachment.
 
-Ordinarily the page_attachments extension locates pages at URLs like /page_attachments/0000/0001/my_image.jpg, regardless of where the attachment is attached.  This may be fine for images, where the user never sees the URL, but what about PDFs or other files where the URL is important? 
+Ordinarily the page_attachments extension locates pages at URLs like
+/page_attachments/0000/0001/my_image.jpg and the attachment is served directly
+by the webserver. This is great for images, where the user never sees the URL,
+but what about PDFs and other files where the URL is important? With this
+extension installed, if you attach report.pdf to the page at
+/president/board/, then the attachment is available at
+/president/board/report.pdf.
 
-With the page_attachments_xsendfile extension, if you attach report.pdf to the page with the slug /president/board/, then the attachment is available at /president/board/report.pdf.
-
-== PERFORMANCE WARNING
-(June 2009)  This extension was a good idea, but it results in higher server loads because it has to run all the attachments embedded in a page through Radiant.  If the page has several image attachments referenced in itself, the browser requests them all at once and Radiant has to find_by_url for each one.  Radiant and a fast machine can handle it, but you need more processes than you otherwise would.  
-
-== Development Status
-
-Because of this performance hit, I don't think it's worth it anymore, so I'm no longer maintaining this extension.  Feel free to fork it or ask me for commit rights if you want to maintain it.  At some point in the future I may figure out something different, like virtual urls only for non-images and the /page_attachments/0000/0001 type for images.
+The attachment:link tag uses this friendly URL format by default unless you
+specify format="fast". The attachment:url tag uses the direct attachment URL
+(/page_attachments/...) by default unless you specify format="friendly". The
+attachment image tags always use the direct URL and you can't specify
+otherwise. Loading a page full of images attached at friendly URLs is a great
+way to bog down your server while Radiant does a find_by_url on each of them,
+so it's not even an option.
 
 == Installation
-=== Easy way:
+=== Automated install:
 ./script/extension install page_attachments_xsendfile
 
-=== Harder way:
+=== Manual install:
 
 1) Unpack/checkout/export the extension into vendor/extensions of your 
    project.
+   
+   git clone git://github.com/jgarber/radiant-page_attachments_xsendfile-extension.git vendor/extensions/page_attachments_xsendfile
 
-2) Run the extension update task.
-
-  $ rake production radiant:extensions:page_attachments_xsendfile:update
-
-3) Restart your server
+2) Restart your server
 
