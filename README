@@ -8,6 +8,13 @@ Ordinarily the page_attachments extension locates pages at URLs like /page_attac
 
 With the page_attachments_xsendfile extension, if you attach report.pdf to the page with the slug /president/board/, then the attachment is available at /president/board/report.pdf.
 
+== PERFORMANCE WARNING
+(June 2009)  This extension was a good idea, but it results in higher server loads because it has to run all the attachments embedded in a page through Radiant.  If the page has several image attachments referenced in itself, the browser requests them all at once and Radiant has to find_by_url for each one.  Radiant and a fast machine can handle it, but you need more processes than you otherwise would.  
+
+== Development Status
+
+Because of this performance hit, I don't think it's worth it anymore, so I'm no longer maintaining this extension.  Feel free to fork it or ask me for commit rights if you want to maintain it.  At some point in the future I may figure out something different, like virtual urls only for non-images and the /page_attachments/0000/0001 type for images.
+
 == Installation
 === Easy way:
 ./script/extension install page_attachments_xsendfile
