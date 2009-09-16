@@ -37,14 +37,14 @@ task :stats => "spec:statsetup"
 desc "Run all specs in spec directory"
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_opts = ['--options', "\"#{extension_root}/spec/spec.opts\""]
-  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_files = FileList["#{extension_root}/spec/**/*_spec.rb"]
 end
 
 namespace :spec do
   desc "Run all specs in spec directory with RCov"
   Spec::Rake::SpecTask.new(:rcov) do |t|
     t.spec_opts = ['--options', "\"#{extension_root}/spec/spec.opts\""]
-    t.spec_files = FileList['spec/**/*_spec.rb']
+    t.spec_files = FileList["#{extension_root}/spec/**/*_spec.rb"]
     t.rcov = true
     t.rcov_opts = ['--exclude', 'spec', '--rails']
   end
