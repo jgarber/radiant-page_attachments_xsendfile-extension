@@ -2,7 +2,7 @@
 require_dependency 'application_controller'
 
 class PageAttachmentsXsendfileExtension < Radiant::Extension
-  version "2.0"
+  version "2.1"
   description "Sends page attachments with X-Sendfile"
   
   
