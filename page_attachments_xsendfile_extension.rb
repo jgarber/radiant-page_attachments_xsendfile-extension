@@ -1,5 +1,5 @@
 # Uncomment this if you reference any of your controllers in activate
-require_dependency 'application'
+require_dependency 'application_controller'
 
 class PageAttachmentsXsendfileExtension < Radiant::Extension
   version "2.0"
@@ -13,10 +13,6 @@ class PageAttachmentsXsendfileExtension < Radiant::Extension
     }
     PageAttachment.send :include, PageAttachmentsXsendfile::PageAttachmentExtensions
     SiteController.send :include, PageAttachmentsXsendfile::SiteControllerExtensions
-    
-    # May as well deliver cached pages with X-Sendfile since we know we have it.
-    env = ENV["RAILS_ENV"] || RAILS_ENV
-    ResponseCache.defaults[:use_x_sendfile] = true if env != "development"
   end
   
   def deactivate

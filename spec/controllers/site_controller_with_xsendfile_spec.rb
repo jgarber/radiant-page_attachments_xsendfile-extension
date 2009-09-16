@@ -14,7 +14,7 @@ describe SiteController, 'with xsendfile' do
   
   describe "alias chain" do
     it "should be set up" do
-      controller.should respond_to(:show_uncached_page_with_attachments)
+      controller.should respond_to(:show_page_with_attachments)
     end
   end
   
